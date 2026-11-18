@@ -253,7 +253,7 @@
     <header>
         <div class="badge">Özer Aşireti Resmi Yayın Organı</div>
         <h1>ÖZER <span>FM</span></h1>
-        <p class="subtitle">Her Sabah Saat 06:00'da Canlı Frekans ve Haber Bülteni</p>
+        <p class="subtitle">Her Gün 18:00 - 19:00 Arası Canlı Frekans ve Haber Bülteni</p>
     </header>
 
     <main>
@@ -261,7 +261,7 @@
         <section class="player-card">
             <div class="status-indicator" id="status-box">
                 <span class="dot" id="status-dot"></span>
-                <span id="status-text">Yayın Bekleniyor • Sabah 06:00 Bülteni</span>
+                <span id="status-text">Yayın Bekleniyor • 18:00 - 19:00 Bülteni</span>
             </div>
 
             <div>
@@ -294,21 +294,21 @@
         <!-- Alt Bilgi Kartları -->
         <div class="grid-section">
             <section class="info-card">
-                <h2>Sabah Bülteni Yayın Akışı</h2>
+                <h2>Akşam Bülteni Yayın Akışı</h2>
                 <ul class="schedule-list">
-                    <li><span class="time-tag">06:00 - 06:01</span> <span>Açılış ve Frekans Anonsu</span></li>
-                    <li><span class="time-tag">06:01 - 06:03</span> <span>Günün Öne Çıkan Manşetleri</span></li>
-                    <li><span class="time-tag">06:03 - 06:10</span> <span>Aşiret ve Topluluk Duyuruları</span></li>
-                    <li><span class="time-tag">06:10 - 06:14</span> <span>Bölge ve Gündem Raporu</span></li>
-                    <li><span class="time-tag">06:14 - 06:17</span> <span>Hava Durumu ve Yol Bilgisi</span></li>
-                    <li><span class="time-tag">06:17 - 06:20</span> <span>Günün Sözü ve Kapanış</span></li>
+                    <li><span class="time-tag">18:00 - 18:05</span> <span>Açılış ve Frekans Anonsu</span></li>
+                    <li><span class="time-tag">18:05 - 18:15</span> <span>Günün Öne Çıkan Manşetleri</span></li>
+                    <li><span class="time-tag">18:15 - 18:35</span> <span>Aşiret ve Topluluk Duyuruları</span></li>
+                    <li><span class="time-tag">18:35 - 18:50</span> <span>Bölge ve Gündem Raporu</span></li>
+                    <li><span class="time-tag">18:50 - 18:55</span> <span>Hava Durumu ve Yol Bilgisi</span></li>
+                    <li><span class="time-tag">18:55 - 19:00</span> <span>Günün Sözü ve Kapanış</span></li>
                 </ul>
             </section>
 
             <section class="info-card">
                 <h2>Frekans Bilgilendirmesi</h2>
                 <div class="announcement-text">
-                    <p><strong>Yayın Saati:</strong> Özer FM canlı frekans konuşması her gün kesintisiz olarak sabah <strong>06:00</strong>'da başlar.</p>
+                    <p><strong>Yayın Saati:</strong> Özer FM canlı frekans konuşması her gün kesintisiz olarak <strong>18:00 - 19:00</strong> saatleri arasında gerçekleşir.</p>
                     <p><strong>İçerik:</strong> Aşiretimize dair önemli kararlar, cemiyet duyuruları, bölge gündemi ve günlük bilgilendirmeler doğrudan bu kanal üzerinden paylaşılır.</p>
                     <p><strong>Erişim:</strong> Bilgisayar veya cep telefonunuzdan herhangi bir uygulama indirmeden bu sayfa üzerinden dinleyebilirsiniz.</p>
                 </div>
@@ -347,35 +347,34 @@
             audio.volume = val;
         }
 
-        // Her gün sabah 06:00'ya geri sayım ve canlı yayın durumu kontrolü
+        // Her gün 18:00'a geri sayım ve 18:00 - 19:00 arası canlı yayın durumu kontrolü
         function updateSchedule() {
             const now = new Date();
             const currentHour = now.getHours();
-            const currentMin = now.getMinutes();
 
             const statusDot = document.getElementById('status-dot');
             const statusText = document.getElementById('status-text');
             const countdownLabel = document.getElementById('countdown-label');
             const countdownEl = document.getElementById('countdown');
 
-            // 06:00 ile 06:25 arası otomatik olarak "CANLI YAYINDA" görünür
-            if (currentHour === 6 && currentMin < 25) {
+            // 18:00 ile 19:00 arası otomatik olarak "CANLI YAYINDA" görünür
+            if (currentHour === 18) {
                 statusDot.classList.add('live');
-                statusText.textContent = 'CANLI YAYINDA • Sabah Haber Bülteni';
+                statusText.textContent = 'CANLI YAYINDA • Akşam Haber Bülteni (18:00 - 19:00)';
                 statusText.style.color = '#ff4d6d';
                 countdownLabel.textContent = 'Yayın Durumu';
                 countdownEl.textContent = 'ŞU AN YAYINDA';
                 return;
             } else {
                 statusDot.classList.remove('live');
-                statusText.textContent = 'Yayın Bekleniyor • Sabah 06:00 Bülteni';
+                statusText.textContent = 'Yayın Bekleniyor • 18:00 - 19:00 Bülteni';
                 statusText.style.color = '#f4f4f6';
                 countdownLabel.textContent = 'Bir Sonraki Canlı Frekans Konuşmasına Kalan Süre';
             }
 
-            // Bir sonraki sabah 06:00'yı hesapla
+            // Bir sonraki akşam 18:00'ı hesapla
             let nextBroadcast = new Date();
-            nextBroadcast.setHours(6, 0, 0, 0);
+            nextBroadcast.setHours(18, 0, 0, 0);
 
             if (now >= nextBroadcast) {
                 nextBroadcast.setDate(nextBroadcast.getDate() + 1);
